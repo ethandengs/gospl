@@ -1,0 +1,56 @@
+# GOSPL Edge Application Configuration
+
+# Supabase Configuration
+supabase:
+  url: ""  # Set via environment variable SUPABASE_URL
+  anon_key: ""  # Set via environment variable SUPABASE_ANON_KEY
+  user_id: ""  # Elder's user ID in Supabase
+
+# Sensor Configuration
+sensors:
+  slipper:
+    device_name: "GOSPL_SLIPPER"  # Bluetooth device name
+    scan_interval_ms: 100  # How often to poll sensors
+    connection_retry_interval_s: 5
+    # Sensor thresholds and calibration
+    accelerometer:
+      sample_rate_hz: 50
+      range_g: 8  # ±8g range
+    gyroscope:
+      sample_rate_hz: 50
+      range_dps: 2000  # ±2000 degrees per second
+    pressure:
+      sample_rate_hz: 20
+      num_sensors: 4  # Number of pressure points per slipper
+
+# Gait Analysis Configuration
+analysis:
+  # Window sizes for different analyses
+  window_size_s: 5  # Size of sliding window for analysis
+  step_detection:
+    acc_threshold_g: 0.8  # Acceleration threshold for step detection
+    min_step_interval_ms: 250  # Minimum time between steps
+  
+  # Fall detection parameters
+  fall_detection:
+    impact_threshold_g: 3.0  # Impact acceleration threshold
+    inactivity_time_s: 5.0  # Time of minimal movement to confirm fall
+    
+  # Gait anomaly thresholds
+  anomaly_detection:
+    speed_deviation_threshold: 0.3  # Relative to baseline
+    cadence_variation_threshold: 0.2  # Coefficient of variation threshold
+    asymmetry_threshold: 0.15  # Left-right asymmetry threshold
+
+# Data Management
+data:
+  local_cache_dir: "./cache"
+  upload_interval_s: 300  # How often to send summary data to cloud (5 min)
+  cache_max_size_mb: 100
+  
+# Logging
+logging:
+  level: "INFO"
+  file: "edge_app.log"
+  max_size_mb: 10
+  backup_count: 3 

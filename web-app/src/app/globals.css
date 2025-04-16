@@ -1,0 +1,270 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  :root {
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius: 0.5rem;
+
+    /* Brand Colors */
+    --primary-blue: 195 71% 39%;  /* #1B8FAD */
+    --primary-teal: 168 42% 46%;  /* #43A695 */
+    
+    /* Button Colors */
+    --button-from: var(--primary-blue);
+    --button-to: var(--primary-teal);
+    --button-hover-from: 195 71% 35%;  /* Slightly darker */
+    --button-hover-to: 168 42% 42%;    /* Slightly darker */
+    
+    /* Text Colors */
+    --text-primary: 222.2 84% 4.9%;
+    --text-secondary: 215 25% 27%;
+    --text-tertiary: 214 32% 91%;
+    
+    /* UI Colors */
+    --accent-1: 220 14% 96%;
+    --accent-2: 220 13% 91%;
+    --accent-3: 216 12% 84%;
+    
+    /* Interactive States */
+    --hover-overlay: 0 0% 0% / 0.05;
+    --active-overlay: 0 0% 0% / 0.1;
+    
+    /* Semantic Colors */
+    --success: 142 72% 29%;
+    --warning: 38 92% 50%;
+    --error: 0 84% 60%;
+    --info: 199 89% 48%;
+
+    /* Neutral Colors */
+    --neutral-100: 255 255 255;    /* #FFFFFF */
+    --neutral-200: 245 245 245;    /* #F5F5F5 */
+    --neutral-300: 229 229 229;    /* #E5E5E5 */
+    --neutral-400: 212 212 212;    /* #D4D4D4 */
+    --neutral-500: 115 115 115;    /* #737373 */
+    --neutral-600: 64 64 64;       /* #404040 */
+    --neutral-700: 23 23 23;       /* #171717 */
+
+    /* Shadcn System Colors */
+    --background: var(--neutral-100);
+    --foreground: var(--neutral-700);
+    
+    --card: var(--neutral-100);
+    --card-foreground: var(--neutral-700);
+    
+    --popover: var(--neutral-100);
+    --popover-foreground: var(--neutral-700);
+    
+    --primary: var(--primary-blue);
+    --primary-foreground: var(--neutral-100);
+    
+    --secondary: var(--neutral-200);
+    --secondary-foreground: var(--neutral-700);
+    
+    --muted: var(--neutral-200);
+    --muted-foreground: var(--neutral-500);
+    
+    --accent: var(--accent-royal);
+    --accent-foreground: var(--neutral-100);
+    
+    --destructive: var(--accent-magenta);
+    --destructive-foreground: var(--neutral-100);
+    
+    --border: var(--neutral-300);
+    --input: var(--neutral-300);
+    --ring: var(--primary-blue);
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    /* Button Colors in Dark Mode */
+    --button-from: 195 71% 45%;  /* Slightly brighter */
+    --button-to: 168 42% 52%;    /* Slightly brighter */
+    --button-hover-from: 195 71% 50%;
+    --button-hover-to: 168 42% 57%;
+    
+    /* Text Colors */
+    --text-primary: 210 40% 98%;
+    --text-secondary: 215 25% 27%;
+    --text-tertiary: 214 32% 91%;
+    
+    /* UI Colors */
+    --accent-1: 222 47% 11%;
+    --accent-2: 223 47% 14%;
+    --accent-3: 224 47% 17%;
+    
+    /* Interactive States */
+    --hover-overlay: 0 0% 100% / 0.1;
+    --active-overlay: 0 0% 100% / 0.2;
+
+    /* Neutral Colors */
+    --neutral-100: 255 255 255;    /* #FFFFFF */
+    --neutral-200: 245 245 245;    /* #F5F5F5 */
+    --neutral-300: 229 229 229;    /* #E5E5E5 */
+    --neutral-400: 212 212 212;    /* #D4D4D4 */
+    --neutral-500: 115 115 115;    /* #737373 */
+    --neutral-600: 64 64 64;       /* #404040 */
+    --neutral-700: 23 23 23;       /* #171717 */
+
+    /* Shadcn System Colors */
+    --background: var(--neutral-700);
+    --foreground: var(--neutral-100);
+    
+    --card: var(--neutral-600);
+    --card-foreground: var(--neutral-100);
+    
+    --popover: var(--neutral-600);
+    --popover-foreground: var(--neutral-100);
+    
+    --primary: var(--primary-blue);
+    --primary-foreground: var(--neutral-100);
+    
+    --secondary: var(--neutral-600);
+    --secondary-foreground: var(--neutral-100);
+    
+    --muted: var(--neutral-600);
+    --muted-foreground: var(--neutral-400);
+    
+    --accent: var(--accent-royal);
+    --accent-foreground: var(--neutral-100);
+    
+    --destructive: var(--accent-magenta);
+    --destructive-foreground: var(--neutral-100);
+    
+    --border: var(--neutral-600);
+    --input: var(--neutral-600);
+    --ring: var(--primary-blue);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: acumin-variable, system-ui, sans-serif;
+    font-variation-settings: "wght" 400;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "vortice-concept", system-ui, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-feature-settings: "ss01" on, "ss02" on;
+    -webkit-font-smoothing: antialiased;
+    @apply font-bold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .font-thin {
+    font-variation-settings: "wght" 100;
+  }
+  .font-extralight {
+    font-variation-settings: "wght" 200;
+  }
+  .font-light {
+    font-variation-settings: "wght" 300;
+  }
+  .font-normal {
+    font-variation-settings: "wght" 400;
+  }
+  .font-medium {
+    font-variation-settings: "wght" 500;
+  }
+  .font-semibold {
+    font-variation-settings: "wght" 600;
+  }
+  .font-bold {
+    font-variation-settings: "wght" 700;
+  }
+  .font-extrabold {
+    font-variation-settings: "wght" 800;
+  }
+  .font-black {
+    font-variation-settings: "wght" 900;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply relative inline-flex items-center justify-center px-6 py-3 
+           text-base font-medium rounded-md shadow-sm
+           text-white transition-all duration-300
+           bg-gradient-to-r from-[hsl(var(--button-from))] to-[hsl(var(--button-to))]
+           hover:from-[hsl(var(--button-hover-from))] hover:to-[hsl(var(--button-hover-to))]
+           hover:scale-105 hover:shadow-lg
+           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[hsl(var(--button-from))];
+  }
+
+  .btn-primary::after {
+    @apply content-[''] absolute inset-0 rounded-md
+           bg-gradient-to-r from-white/10 to-transparent opacity-0
+           transition-opacity duration-300;
+  }
+
+  .btn-primary:hover::after {
+    @apply opacity-100;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center px-6 py-3
+           border border-gray-300 dark:border-gray-600
+           text-base font-medium rounded-md
+           text-gray-700 dark:text-gray-200
+           bg-white dark:bg-gray-800
+           hover:bg-gray-50 dark:hover:bg-gray-700
+           transition-all duration-300;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r
+           from-[hsl(var(--button-from))] to-[hsl(var(--button-to))];
+  }
+}
