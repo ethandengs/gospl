@@ -87,17 +87,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <link rel="stylesheet" href="https://use.typekit.net/yja8etl.css" />
       </head>
       <body className={fontClass}>
-        <ErrorBoundary>
-          <ThemeProvider
-            defaultTheme="system"
-            storageKey="gospl-ui-theme"
-          >
-            <AuthProvider>
+        <ThemeProvider
+          defaultTheme="system"
+          storageKey="gospl-ui-theme"
+        >
+          <AuthProvider>
+            <ErrorBoundary>
               {children}
-              <Toaster />
-            </AuthProvider>
-          </ThemeProvider>
-        </ErrorBoundary>
+            </ErrorBoundary>
+            <Toaster />
+          </AuthProvider>
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>
