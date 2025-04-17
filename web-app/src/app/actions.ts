@@ -44,7 +44,7 @@ export async function logoutAction(): Promise<AuthActionResult> {
     
     return { 
       success: true,
-      redirectTo: '/login'
+      redirectTo: '/'
     };
   } catch (error) {
     const authError = handleAuthError(error);

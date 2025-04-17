@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 254 254"
+   version="1.1"
+   id="svg10"
+   sodipodi:docname="app icon_type.svg"
+   inkscape:version="1.4 (e7c3feb1, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview10"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.4091055"
+     inkscape:cx="167.1273"
+     inkscape:cy="114.25688"
+     inkscape:window-width="1264"
+     inkscape:window-height="997"
+     inkscape:window-x="209"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="圖層_1-2" />
+  <defs
+     id="defs2">
+    <style
+       id="style1">.cls-1{fill:url(#未命名漸層_13);}.cls-2,.cls-3{fill:#fff;}.cls-3{font-size:36.18px;font-family:Vortice-Concept, Vortice;letter-spacing:-0.06em;}</style>
+    <linearGradient
+       id="未命名漸層_13"
+       x1="-45.22"
+       y1="-52.72"
+       x2="310.14"
+       y2="318.12"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0.19"
+         stop-color="#1f9ebf"
+         id="stop1" />
+      <stop
+         offset="0.83"
+         stop-color="#4bb8a5"
+         id="stop2" />
+    </linearGradient>
+  </defs>
+  <g
+     id="圖層_2"
+     data-name="圖層 2">
+    <g
+       id="圖層_1-2"
+       data-name="圖層 1">
+      <rect
+         class="cls-1"
+         width="254"
+         height="254"
+         rx="58.77"
+         id="rect2" />
+      <path
+         class="cls-2"
+         d="m 93.775489,153.74527 a 24.738029,24.738029 0 1 1 24.738031,-24.72225 24.769583,24.769583 0 0 1 -24.738031,24.72225 z m 0,-38.51118 a 13.788927,13.788927 0 1 0 13.788941,13.78893 13.788927,13.788927 0 0 0 -13.788941,-13.75738 z"
+         id="path2"
+         style="stroke-width:1.57768" />
+      <path
+         class="cls-2"
+         d="M 67.223131,129.05457 V 104.47432 H 56.274029 v 4.05463 a 24.722252,24.722252 0 1 0 0,41.01969 13.788927,13.788927 0 0 1 -26.820567,2.83982 l -10.444244,3.28159 a 24.738029,24.738029 0 0 0 48.32435,-7.44665 h -9.355645 a 24.674922,24.674922 0 0 0 9.245208,-19.16883 z m -24.738029,13.77316 a 13.788927,13.788927 0 1 1 13.788927,-13.77316 13.804704,13.804704 0 0 1 -13.788927,13.77316 z"
+         id="path3"
+         style="stroke-width:1.57768" />
+      <path
+         class="cls-2"
+         d="m 190.85018,104.31655 a 24.548708,24.548708 0 0 0 -13.78893,4.2124 v -4.05463 h -10.94911 v 66.73587 h 10.94911 v -21.63 a 24.738029,24.738029 0 1 0 13.78893,-45.26364 z m 0,38.51118 a 13.788927,13.788927 0 1 1 13.78892,-13.77316 13.804704,13.804704 0 0 1 -13.78892,13.77316 z"
+         id="path4"
+         style="stroke-width:1.57768" />
+      <rect
+         class="cls-2"
+         x="218.27023"
+         y="85.952332"
+         width="10.949102"
+         height="66.246803"
+         id="rect4"
+         style="stroke-width:1.57768" />
+      <path
+         class="cls-2"
+         d="m 142.65203,155.40183 c -13.17362,0 -22.35573,-7.62019 -22.92369,-16.73918 h 12.90543 c 0.4733,3.72332 4.6226,7.0049 9.9236,7.0049 5.30101,0 8.59837,-1.98788 8.72457,-4.30707 0.41021,-7.71486 -29.97592,-5.5061 -29.97592,-22.35573 0,-8.15661 8.09349,-15.20884 21.06203,-15.20884 12.70033,0 19.91033,6.92602 20.66762,16.6603 h -11.75373 c -0.37863,-3.80221 -4.05463,-6.83135 -9.27676,-6.83135 -4.92235,0 -8.70879,2.36652 -8.70879,5.19057 0,8.94545 29.75505,4.5595 29.75505,22.54505 0,6.97335 -7.62019,14.04135 -20.39941,14.04135 z"
+         id="path5"
+         style="stroke-width:1.57768" />
+    </g>
+  </g>
+</svg>
