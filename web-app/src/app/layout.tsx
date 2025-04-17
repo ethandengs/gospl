@@ -1,10 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Toaster } from "@/components/ui/sonner";
-import { ThemeProvider } from "@/components/providers/theme-provider";
-import { ErrorBoundary } from "@/components/common";
 import { Analytics } from '@vercel/analytics/react';
 import { fontClass } from '@/lib/fonts';
-import { AuthProvider } from "@/contexts/AuthContext";
+import { Providers } from './providers';
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -87,17 +84,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <link rel="stylesheet" href="https://use.typekit.net/yja8etl.css" />
       </head>
       <body className={fontClass}>
-        <ThemeProvider
-          defaultTheme="system"
-          storageKey="gospl-ui-theme"
-        >
-          <AuthProvider>
-            <ErrorBoundary>
-              {children}
-            </ErrorBoundary>
-            <Toaster />
-          </AuthProvider>
-        </ThemeProvider>
+        <Providers>
+          {children}
+        </Providers>
         <Analytics />
       </body>
     </html>
