@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import type { Alert, GaitData } from '@/types/supabase';
+import type { Alert, GaitData } from '@/lib/supabase';
 import { GaitChart } from '@/components/features/gait';
 import { AlertList } from '@/components/features/alerts';
 import { StatCard } from '@/components/ui/dashboard/stat-card';
@@ -42,7 +42,7 @@ export default function DashboardPage() {
     };
 
     fetchData();
-  }, []); // Remove timeframe dependency since it's not used in the effect
+  }, [timeframe]); // Refetch when timeframe changes
 
   const handleAlertAcknowledge = async (alertId: number) => {
     try {
@@ -59,8 +59,8 @@ export default function DashboardPage() {
     return (
       <div className="animate-pulse space-y-6">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {['speed', 'cadence', 'alerts', 'time'].map((type) => (
-            <Card key={`skeleton-${type}`} className="h-32" />
+          {[...Array(4)].map((_, i) => (
+            <Card key={`skeleton-card-${i}`} className="h-32" />
           ))}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

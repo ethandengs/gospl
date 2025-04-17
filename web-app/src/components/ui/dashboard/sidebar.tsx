@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { cn } from '@/components/ui/utils';
+import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { logoutAction } from '@/app/actions';
@@ -18,7 +18,7 @@ import {
 import { toast } from 'sonner';
 import { useState } from 'react';
 import type { SidebarConfig } from '@/types/auth';
-import { isAuthError } from '@/components/ui/utils/error-handler';
+import { isAuthError } from '@/lib/utils/error-handler';
 
 type SidebarProps = React.HTMLAttributes<HTMLDivElement> & SidebarConfig;
 

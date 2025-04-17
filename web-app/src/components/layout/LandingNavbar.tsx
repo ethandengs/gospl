@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useTheme } from '@/components/providers/theme-provider';
 import { Logo } from '@/components/ui/logo';
 import { useEffect, useState } from 'react';
-import { cn } from '@/components/ui/utils';
+import { cn } from '@/lib/utils';
 
 export default function LandingNavbar() {
   const { theme } = useTheme();

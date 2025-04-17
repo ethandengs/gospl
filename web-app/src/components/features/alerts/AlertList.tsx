@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { format } from 'date-fns';
-import type { Alert } from '@/types/supabase';
+import type { Alert } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -15,7 +16,17 @@ export default function AlertList({ alerts, onAcknowledge }: AlertListProps) {
   const [expandedAlertId, setExpandedAlertId] = useState<number | null>(null);
 
   const handleAcknowledge = async (alertId: number) => {
-    onAcknowledge(alertId);
+    try {
+      const { error } = await supabase
+        .from('alerts')
+        .update({ acknowledged: true })
+        .eq('id', alertId);
+
+      if (error) throw error;
+      onAcknowledge(alertId);
+    } catch (error) {
+      console.error('Error acknowledging alert:', error);
+    }
   };
 
   const getSeverityStyle = (severity: Alert['severity']) => {

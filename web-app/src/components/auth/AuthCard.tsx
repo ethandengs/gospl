@@ -1,5 +1,5 @@
-import { cn } from "@/components/ui/utils";
-import { designTokens } from "@/components/ui/design-tokens";
+import { cn } from "@/lib/utils";
+import { designTokens } from "@/lib/design-tokens";
 import { Logo } from "@/components/ui/logo";
 import Link from "next/link";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
