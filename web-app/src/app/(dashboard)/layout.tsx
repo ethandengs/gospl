@@ -1,7 +1,7 @@
 'use client';
 
 import { redirect } from "next/navigation";
-import { getSession } from "@lib/auth";
+import { getSession } from '@/lib/auth';
 import { Sidebar } from "@/components/ui/dashboard/sidebar";
 
 // TODO: Import data fetching utilities and types

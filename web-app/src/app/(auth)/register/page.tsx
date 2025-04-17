@@ -2,7 +2,7 @@
 
 import { AuthCard } from '@/components/auth/AuthCard';
 import { AuthForm } from '@/components/auth/auth-form';
-import { supabase } from '@lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
 
 export default function RegisterPage() {

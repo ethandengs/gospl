@@ -1,7 +1,7 @@
 'use client';
 
-import { designTokens } from '@lib/design-tokens';
-import { cn } from '@lib/utils';
+import { designTokens } from '@/lib/design-tokens';
+import { cn } from '@/lib/utils';
 
 export default function AuthLayout({
   children,
