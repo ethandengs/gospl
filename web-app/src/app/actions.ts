@@ -2,8 +2,8 @@
 
 import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import { AuthActionResult } from '../types/auth';
-import { handleAuthError } from '../lib/utils/error-handler';
+import { AuthActionResult } from '@/types/auth';
+import { handleAuthError } from '@/lib/utils/error-handler';
 
 export async function loginAction(formData: { email: string; password: string }): Promise<AuthActionResult> {
   const supabase = createServerActionClient({ cookies });

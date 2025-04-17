@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Toaster } from "../components/ui/sonner";
-import { ThemeProvider } from "../components/providers/theme-provider";
-import { ErrorBoundary } from "../components/common";
+import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { ErrorBoundary } from "@/components/common";
 import { Analytics } from '@vercel/analytics/react';
-import { fontClass } from '../lib/fonts';
-import { AuthProvider } from "../contexts/AuthContext";
+import { fontClass } from '@/lib/fonts';
+import { AuthProvider } from "@/contexts/AuthContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
