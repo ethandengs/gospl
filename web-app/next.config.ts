@@ -7,6 +7,11 @@ const nextConfig: NextConfig = {
   },
   eslint: {
     ignoreDuringBuilds: false,
+  },
+  modularizeImports: {
+    "@/lib": {
+      transform: "@/lib/{{member}}"
+    }
   }
 };
 
