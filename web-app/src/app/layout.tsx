@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ErrorBoundary } from "@/components/common";
 import { Analytics } from '@vercel/analytics/react';
 import { fontClass } from '@/lib/fonts';
+import { AuthProvider } from "@/contexts/AuthContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -91,8 +92,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
             defaultTheme="system"
             storageKey="gospl-ui-theme"
           >
-            {children}
-            <Toaster />
+            <AuthProvider>
+              {children}
+              <Toaster />
+            </AuthProvider>
           </ThemeProvider>
         </ErrorBoundary>
         <Analytics />
