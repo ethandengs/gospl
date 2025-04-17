@@ -8,17 +8,18 @@ import { Label } from '@/components/ui/label';
 import { Icons } from '@/components/ui/icons';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Separator } from '@/components/ui/separator';
-import { supabase } from '@/lib/supabase';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface AuthFormProps {
   type: 'login' | 'register' | 'reset-password';
-  onSubmit: (data: { email: string; password: string }) => Promise<void>;
   isLoading?: boolean;
+  onSubmit?: (data: { email: string; password: string }) => Promise<void>;
 }
 
-export function AuthForm({ type, onSubmit, isLoading: externalLoading }: AuthFormProps) {
+export function AuthForm({ type, isLoading: externalLoading, onSubmit }: AuthFormProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { signInWithOAuth } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -36,11 +37,16 @@ export function AuthForm({ type, onSubmit, isLoading: externalLoading }: AuthFor
       if (!email || !password) {
         throw new Error('Please enter both email and password');
       }
-      console.log('Submitting form with email:', email);
-      await onSubmit({ email, password });
+      
+      if (onSubmit) {
+        await onSubmit({ email, password });
+      }
+      
+      // Handle successful auth
+      router.push(searchParams.get('redirectTo') || '/dashboard');
     } catch (err) {
       console.error('Form submission error:', err);
-      setError(err instanceof Error ? err.message : 'An error occurred during login');
+      setError(err instanceof Error ? err.message : 'An error occurred during authentication');
       // Keep the form in a loading state for a moment to ensure the error is visible
       setTimeout(() => setLoading(false), 500);
       return;
@@ -51,13 +57,9 @@ export function AuthForm({ type, onSubmit, isLoading: externalLoading }: AuthFor
   const handleSocialLogin = async (provider: 'google' | 'github') => {
     setSocialLoading(provider);
     try {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider,
-        options: {
-          redirectTo: `${window.location.origin}/auth/callback?redirectTo=${encodeURIComponent(searchParams.get('redirectTo') || '/dashboard')}`,
-        },
+      await signInWithOAuth(provider, {
+        redirectTo: `${window.location.origin}/auth/callback?redirectTo=${encodeURIComponent(searchParams.get('redirectTo') || '/dashboard')}`,
       });
-      if (error) throw error;
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred with social login');
       setSocialLoading(null);
