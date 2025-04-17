@@ -6,12 +6,11 @@ import {
 } from "lucide-react"
 
 import { cn } from "@/components/ui/utils"
-import { ButtonProps, buttonVariants } from "@/components/ui/button"
+import { type ButtonProps, buttonVariants } from "@/components/ui/button"
 
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   return (
     <nav
-      role="navigation"
       aria-label="pagination"
       data-slot="pagination"
       className={cn("mx-auto flex w-full justify-center", className)}
@@ -39,7 +38,7 @@ function PaginationItem({ ...props }: React.ComponentProps<"li">) {
 
 type PaginationLinkProps = {
   isActive?: boolean
-} & Pick<React.ComponentProps<typeof ButtonProps>, "size"> &
+} & Pick<ButtonProps, "size"> &
   React.ComponentProps<"a">
 
 function PaginationLink({
