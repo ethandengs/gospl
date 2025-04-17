@@ -2,35 +2,24 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { useUser } from '@/lib/auth/useUser';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 export default function Layout({ children }: LayoutProps) {
-  const { user, isLoading, error } = useUser();
+  const { user, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLoading && !user) {
+    if (!loading && !user) {
       router.push('/login');
     }
-  }, [user, isLoading, router]);
+  }, [user, loading, router]);
 
-  if (isLoading) {
+  if (loading) {
     return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
-  }
-
-  if (error) {
-    return (
-      <Alert variant="destructive">
-        <AlertDescription>
-          {error.message}
-        </AlertDescription>
-      </Alert>
-    );
   }
 
   return (
