@@ -2,23 +2,15 @@
 
 import { AuthCard } from '@/components/auth/AuthCard';
 import { AuthForm } from '@/components/auth/auth-form';
-import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function RegisterPage() {
   const router = useRouter();
+  const { signUp } = useAuth();
 
   const handleRegister = async ({ email, password }: { email: string; password: string }) => {
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
-      },
-    });
-
-    if (error) throw error;
-
+    await signUp(email, password);
     // Show success message and redirect to login
     router.push('/login?registered=true');
   };

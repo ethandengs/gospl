@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
 import type { Alert, GaitData } from '@/lib/supabase';
 import { GaitChart } from '@/components/features/gait';
 import { AlertList } from '@/components/features/alerts';
@@ -9,6 +8,7 @@ import { StatCard } from '@/components/ui/dashboard/stat-card';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Activity, TrendingUp, AlertTriangle, Clock } from 'lucide-react';
+import { fetchGaitData, fetchAlerts, updateAlertStatus } from '@/services/gait';
 
 // TODO: Remove this interface once all gait data features are implemented
 // interface GaitData {
@@ -27,35 +27,13 @@ export default function DashboardPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // TODO: Implement data transformation for gait metrics
-        // - Transform raw metrics from JSON into structured data
-        // - Add data validation and error handling
-        // - Implement data filtering based on timeframe
-        const { data: gaitData, error: gaitError } = await supabase
-          .from('gait_data')
-          .select('*')
-          .order('created_at', { ascending: false })
-          .limit(50);
+        const [gaitData, alertData] = await Promise.all([
+          fetchGaitData(50),
+          fetchAlerts(5)
+        ]);
 
-        if (gaitError) throw gaitError;
-
-        // Fetch recent alerts
-        const { data: alertData, error: alertError } = await supabase
-          .from('alerts')
-          .select('*')
-          .order('created_at', { ascending: false })
-          .limit(5);
-
-        if (alertError) throw alertError;
-
-        // TODO: Transform gait data to match GaitData type
-        const transformedGaitData = gaitData?.map(data => ({
-          ...data,
-          metrics: JSON.parse(data.metrics),
-        })) || [];
-
-        setGaitData(transformedGaitData);
-        setAlerts(alertData || []);
+        setGaitData(gaitData);
+        setAlerts(alertData);
       } catch (error) {
         console.error('Error fetching dashboard data:', error);
       } finally {
@@ -66,10 +44,15 @@ export default function DashboardPage() {
     fetchData();
   }, [timeframe]); // Refetch when timeframe changes
 
-  const handleAlertAcknowledge = (alertId: number) => {
-    setAlerts(alerts.map(alert => 
-      alert.id === alertId ? { ...alert, acknowledged: true } : alert
-    ));
+  const handleAlertAcknowledge = async (alertId: number) => {
+    try {
+      await updateAlertStatus(alertId, true);
+      setAlerts(alerts.map(alert => 
+        alert.id === alertId ? { ...alert, acknowledged: true } : alert
+      ));
+    } catch (error) {
+      console.error('Error updating alert status:', error);
+    }
   };
 
   if (loading) {

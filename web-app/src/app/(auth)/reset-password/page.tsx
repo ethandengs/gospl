@@ -2,19 +2,15 @@
 
 import { AuthCard } from '@/components/auth/AuthCard';
 import { AuthForm } from '@/components/auth/auth-form';
-import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function ResetPasswordPage() {
   const router = useRouter();
+  const { resetPassword } = useAuth();
 
   const handleResetPassword = async ({ email }: { email: string; password: string }) => {
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/auth/callback`,
-    });
-
-    if (error) throw error;
-
+    await resetPassword(email);
     // Show success message and redirect to login
     router.push('/login?reset=requested');
   };
