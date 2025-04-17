@@ -1,5 +1,7 @@
+'use client';
+
 import { redirect } from "next/navigation";
-import { getSession } from "@/lib/auth";
+import { getSession } from "@lib/auth";
 import { Sidebar } from "@/components/ui/dashboard/sidebar";
 
 // TODO: Import data fetching utilities and types
@@ -25,12 +27,10 @@ export default async function DashboardLayout({
   // const dashboardData = await fetchDashboardData(session.user.id);
 
   return (
-    <div className="flex min-h-screen">
-      <Sidebar className="w-64 border-r" />
-      <main className="flex-1 overflow-y-auto">
-        <div className="container mx-auto py-6 px-4">
-          {children}
-        </div>
+    <div className="flex h-screen">
+      <Sidebar />
+      <main className="flex-1 p-8 overflow-y-auto">
+        {children}
       </main>
     </div>
   );

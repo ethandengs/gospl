@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
-import type { Alert, GaitData } from '@/lib/supabase';
+import { supabase } from '@lib/supabase';
+import type { Alert, GaitData } from '@lib/supabase';
 import { GaitChart } from '@/components/features/gait';
 import { AlertList } from '@/components/features/alerts';
 import { StatCard } from '@/components/ui/dashboard/stat-card';
