@@ -9,8 +9,10 @@ interface ClientLayoutProps {
 
 export default function ClientLayout({ children }: ClientLayoutProps) {
   return (
-    <Providers>
-      {children}
-    </Providers>
+    <div className="min-h-screen">
+      <Providers>
+        {children}
+      </Providers>
+    </div>
   )
 } 

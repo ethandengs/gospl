@@ -7,9 +7,5 @@ interface ProvidersProps {
 }
 
 export function Providers({ children }: ProvidersProps) {
-  return (
-    <>
-      {children}
-    </>
-  )
+  return <div className="contents">{children}</div>
 } 
