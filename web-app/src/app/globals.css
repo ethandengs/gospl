@@ -192,6 +192,38 @@
     font-family: acumin-variable, system-ui, sans-serif;
     font-variation-settings: "wght" 400;
   }
+
+  /* Cursor pointer for all clickable elements */
+  button,
+  [role="button"],
+  a,
+  [type="button"],
+  [type="submit"],
+  [type="reset"],
+  .btn-primary,
+  .btn-secondary,
+  .clickable,
+  select,
+  details summary,
+  input[type="radio"],
+  input[type="checkbox"] {
+    cursor: pointer;
+  }
+
+  /* Keep default cursor for disabled elements */
+  button:disabled,
+  [role="button"]:disabled,
+  a.disabled,
+  [type="button"]:disabled,
+  [type="submit"]:disabled,
+  [type="reset"]:disabled,
+  .btn-primary:disabled,
+  .btn-secondary:disabled,
+  .clickable:disabled,
+  select:disabled {
+    cursor: default;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: "vortice-concept", system-ui, sans-serif;
     font-weight: 400;
