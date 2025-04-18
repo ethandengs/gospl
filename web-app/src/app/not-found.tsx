@@ -1,12 +1,13 @@
-// web-app/src/app/not-found.tsx
-export const dynamic = 'force-dynamic'; // always render at runtime, never prerender
-export const revalidate = 0;           // no ISR for this route
+// src/app/not-found.tsx
+export const dynamic = 'force-dynamic'; // always render at runtime
+export const revalidate = 0;           // disable ISR
 
 import React from 'react';
+import Link from 'next/link';
 import { buildLogger } from '@/lib/utils/build-logger';
 
-// log module load (runs once, at startup)
-buildLogger.info('[NotFound] module loaded');
+// Log when this module is loaded
+buildLogger.info('[NotFound] module initialized');
 
 export default function NotFound() {
   buildLogger.info('[NotFound] render start');
@@ -18,17 +19,19 @@ export default function NotFound() {
         <p className="mb-6 text-lg text-gray-600 dark:text-gray-400 text-center max-w-md">
           Oops! We can’t find the page you’re looking for.
         </p>
-        <a
+        <Link
           href="/"
           className="text-base underline hover:no-underline focus:outline-none focus:ring"
         >
           ← Back to Home
-        </a>
+        </Link>
       </main>
     );
   } catch (error) {
-    buildLogger.error('[NotFound] render error', error instanceof Error ? error : new Error(String(error)));
-    // re‑throw so Next.js still knows this page failed
+    buildLogger.error(
+      '[NotFound] render error',
+      error instanceof Error ? error : new Error(String(error))
+    );
     throw error;
   }
 }
