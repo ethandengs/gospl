@@ -35,8 +35,13 @@ export default function LoginPage() {
         console.log('Login successful—redirecting to', redirectTo);
         router.replace(redirectTo);
       } else {
-        // you can customize based on your action's error shape
-        setErrorMessage(result.error ?? 'Login failed, please try again.');
+        // Normalize result.error into a string
+        const rawError = result.error;
+        const msg =
+          typeof rawError === 'string'
+            ? rawError
+            : rawError?.message ?? 'Login failed, please try again.';
+        setErrorMessage(msg);
       }
     } catch (err) {
       console.error('Login error:', err);

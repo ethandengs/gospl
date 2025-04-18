@@ -3,10 +3,13 @@ import React from 'react';
 import Link from 'next/link';
 import { buildLogger } from '@/lib/utils/build-logger';
 
+// Log at build time
 buildLogger.info('[Pages404] module loaded');
 
 export default function Custom404() {
+  // Log each render
   buildLogger.info('[Pages404] render start');
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
       <h1 className="mb-4 text-3xl font-bold">404 – Page Not Found</h1>
@@ -22,8 +25,3 @@ export default function Custom404() {
     </main>
   );
 }
-
-// Force this to always be server‑rendered (no static prerender)
-export const getServerSideProps = async () => {
-  return { props: {} };
-};

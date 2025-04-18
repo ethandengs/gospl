@@ -1,6 +1,7 @@
+// src/components/auth/auth-form.tsx
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -19,6 +20,9 @@ interface AuthFormProps {
 export function AuthForm({ type, isLoading: externalLoading, onSubmit }: AuthFormProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  // Safely derive redirectTo once:
+  const redirectTo = searchParams?.get('redirectTo') ?? '/dashboard';
+
   const { signInWithOAuth } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -42,12 +46,12 @@ export function AuthForm({ type, isLoading: externalLoading, onSubmit }: AuthFor
         await onSubmit({ email, password });
       }
       
-      // Handle successful auth
-      router.push(searchParams.get('redirectTo') || '/dashboard');
+      // Redirect using the precomputed string
+      router.push(redirectTo);
     } catch (err) {
       console.error('Form submission error:', err);
       setError(err instanceof Error ? err.message : 'An error occurred during authentication');
-      // Keep the form in a loading state for a moment to ensure the error is visible
+      // Brief delay so user notices the error state
       setTimeout(() => setLoading(false), 500);
       return;
     }
@@ -58,9 +62,10 @@ export function AuthForm({ type, isLoading: externalLoading, onSubmit }: AuthFor
     setSocialLoading(provider);
     try {
       await signInWithOAuth(provider, {
-        redirectTo: `${window.location.origin}/auth/callback?redirectTo=${encodeURIComponent(searchParams.get('redirectTo') || '/dashboard')}`,
+        redirectTo: `${window.location.origin}/auth/callback?redirectTo=${encodeURIComponent(redirectTo)}`,
       });
     } catch (err) {
+      console.error('Social login error:', err);
       setError(err instanceof Error ? err.message : 'An error occurred with social login');
       setSocialLoading(null);
     }
@@ -195,4 +200,4 @@ export function AuthForm({ type, isLoading: externalLoading, onSubmit }: AuthFor
       </p>
     </div>
   );
-} 
+}
