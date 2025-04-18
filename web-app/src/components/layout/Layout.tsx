@@ -2,7 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+// TODO: Implement proper error handling UI components
+// import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useUser } from '@/lib/auth/useUser';
 
 interface LayoutProps {
@@ -10,7 +11,8 @@ interface LayoutProps {
 }
 
 export default function Layout({ children }: LayoutProps) {
-  const { user, isLoading, error } = useUser();
+  // TODO: Implement proper error handling
+  const { user, isLoading } = useUser();
   const router = useRouter();
 
   useEffect(() => {
@@ -23,15 +25,16 @@ export default function Layout({ children }: LayoutProps) {
     return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
   }
 
-  if (error) {
-    return (
-      <Alert variant="destructive">
-        <AlertDescription>
-          {error.message}
-        </AlertDescription>
-      </Alert>
-    );
-  }
+  // TODO: Implement proper error UI
+  // if (error) {
+  //   return (
+  //     <Alert variant="destructive">
+  //       <AlertDescription>
+  //         {error.message}
+  //       </AlertDescription>
+  //     </Alert>
+  //   );
+  // }
 
   return (
     <div className="min-h-screen flex flex-col">
