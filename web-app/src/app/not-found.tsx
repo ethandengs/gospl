@@ -16,10 +16,11 @@
 // } 
 
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout() {
   return (
     <html lang="en">
       <body>Simple layout</body>
     </html>
   );
 }
+
