@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 
-export default function Error({
+export default function ErrorPage({
   error,
   reset,
 }: {
@@ -15,14 +15,17 @@ export default function Error({
   }, [error])
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h2 className="text-xl font-semibold">Something went wrong!</h2>
-      <button
-        className="mt-4 rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-        onClick={() => reset()}
-      >
-        Try again
-      </button>
+    <div className="min-h-screen flex items-center justify-center p-4 bg-background">
+      <div className="text-center">
+        <h2 className="text-2xl font-bold mb-4">Something went wrong!</h2>
+        <button
+          type="button"
+          onClick={reset}
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        >
+          Try again
+        </button>
+      </div>
     </div>
   )
 } 
