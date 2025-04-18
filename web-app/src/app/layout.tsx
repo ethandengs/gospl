@@ -4,7 +4,10 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Analytics } from '@vercel/analytics/react';
 import { fontClass } from '@/lib/fonts';
 import { AuthProvider } from "@/contexts/AuthContext";
+import { buildLogger } from "@/lib/utils/build-logger";
 import "./globals.css";
+
+buildLogger.info('Initializing root layout');
 
 export const metadata: Metadata = {
   title: {
@@ -66,6 +69,8 @@ export const metadata: Metadata = {
   }
 };
 
+buildLogger.debug('Metadata configuration loaded', metadata as Record<string, unknown>);
+
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
@@ -75,11 +80,15 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+buildLogger.debug('Viewport configuration loaded', viewport as Record<string, unknown>);
+
 interface RootLayoutProps {
   children: React.ReactNode
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
+  buildLogger.info('Rendering root layout');
+  
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
