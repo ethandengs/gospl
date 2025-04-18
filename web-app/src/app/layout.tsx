@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { Analytics } from '@vercel/analytics/react';
+import { VercelAnalyticsClient } from '@/components/common/VercelAnalyticsClient';
 import { fontClass } from '@/lib/fonts';
 import { AuthProvider } from "@/contexts/AuthContext";
 import { buildLogger } from "@/lib/utils/build-logger";
@@ -104,7 +104,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <Toaster />
           </AuthProvider>
         </ThemeProvider>
-        <Analytics />
+        <VercelAnalyticsClient />
       </body>
     </html>
   );
