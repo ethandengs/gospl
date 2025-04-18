@@ -18,26 +18,9 @@ interface AuthCardProps {
 export function AuthCard({ children, title, subtitle, className, backLink }: AuthCardProps) {
   return (
     <div className={cn("py-8", className)}>
-      <div className="mb-4 flex flex-col items-center gap-2">
+      <div className="mb-4 flex flex-col items-center gap-2 pb-8">
         <Logo className="h-12 w-auto" darkMode={false} />
-        <h2 className="mt-6 text-center text-2xl font-semibold tracking-tight text-gray-900">
-          {title}
-        </h2>
-        {subtitle && (
-          <p className="text-center text-sm text-gray-600">
-            {subtitle}
-          </p>
-        )}
       </div>
-      {backLink && (
-          <Link
-            href={backLink.href}
-            className="pl-2 pb-2 flex items-center text-sm text-gray-600 hover:text-gray-900 transition-colors"
-          >
-            <ArrowLeftIcon className="h-4 w-4 mr-1" />
-            {backLink.label}
-          </Link>
-        )}
       <div className={cn(
         "bg-white relative",
         designTokens.radius.card,
@@ -45,6 +28,23 @@ export function AuthCard({ children, title, subtitle, className, backLink }: Aut
         "border border-gray-200",
         designTokens.spacing.card
       )}>
+        {backLink && (
+          <Link
+            href={backLink.href}
+            className="pb-2 flex items-center text-sm text-gray-600 hover:text-gray-900 transition-colors"
+          >
+            <ArrowLeftIcon className="h-4 w-4 mr-1" />
+            {backLink.label}
+          </Link>
+        )}
+        <h2 className="mt-2 text-center text-2xl font-semibold tracking-tight text-gray-900">
+          {title}
+        </h2>
+        {subtitle && (
+          <p className="pb-8 text-center text-sm text-gray-600">
+            {subtitle}
+          </p>
+        )}
         {children}
       </div>
     </div>

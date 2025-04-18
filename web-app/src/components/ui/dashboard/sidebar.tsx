@@ -18,7 +18,8 @@ import {
 import { toast } from 'sonner';
 import { useState } from 'react';
 import type { SidebarConfig } from '@/types/auth';
-import { isAuthError } from '@/lib/utils/error-handler';
+// TODO: Implement proper error handling
+// import { isAuthError } from '@/lib/utils/error-handler';
 
 type SidebarProps = React.HTMLAttributes<HTMLDivElement> & SidebarConfig;
 
@@ -39,6 +40,7 @@ export function Sidebar({
   const pathname = usePathname();
   const router = useRouter();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  // TODO: Implement proper error state management
   const [error, setError] = useState<string | null>(null);
 
   const routes = [
@@ -74,22 +76,16 @@ export function Sidebar({
         toast.success('Successfully logged out');
         router.push(result.redirectTo || '/login');
       } else if (result.error) {
+        console.log('Logout error:', result.error);
         setError(result.error.message);
-        toast.error(result.error.message, {
-          icon: <AlertCircle className="h-4 w-4" />,
-          description: `Error code: ${result.error.code}`,
-        });
+        toast.error(result.error.message);
       }
     } catch (error) {
-      const errorMessage = isAuthError(error) 
-        ? error.message 
-        : 'An unexpected error occurred during logout';
-      
+      // TODO: Implement proper error type checking
+      console.log('Unexpected error during logout:', error);
+      const errorMessage = 'An unexpected error occurred during logout';
       setError(errorMessage);
-      toast.error(errorMessage, {
-        icon: <AlertCircle className="h-4 w-4" />,
-        description: 'Please try again or contact support if the issue persists',
-      });
+      toast.error(errorMessage);
     } finally {
       setIsLoggingOut(false);
     }

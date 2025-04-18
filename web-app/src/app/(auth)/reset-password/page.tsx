@@ -17,7 +17,7 @@ export default function ResetPasswordPage() {
 
   return (
     <AuthCard
-      title="Reset your password"
+      title="Password Reset"
       subtitle="Enter your email address and we'll send you a link to reset your password"
       backLink={{
         href: '/login',
