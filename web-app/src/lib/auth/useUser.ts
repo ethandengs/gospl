@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { User } from '@supabase/supabase-js';
+import type { User } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
 
 // TODO: Add interfaces for extended user profile and preferences
@@ -13,17 +13,18 @@ import { supabase } from '@/lib/supabase';
 export function useUser() {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
   const [sessionChecked, setSessionChecked] = useState(false);
 
   useEffect(() => {
     let mounted = true;
 
-    // Get initial session
     const getInitialSession = async () => {
       try {
         const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-        if (sessionError) throw sessionError;
+        if (sessionError) {
+          console.log('Error getting session:', sessionError);
+          return;
+        }
         
         if (mounted) {
           // TODO: Fetch additional user data:
@@ -31,15 +32,10 @@ export function useUser() {
           // - User preferences
           // - User permissions and roles
           setUser(session?.user ?? null);
-          setError(null);
           setSessionChecked(true);
         }
       } catch (error) {
-        console.error('Error getting session:', error);
-        if (mounted) {
-          setError(error instanceof Error ? error : new Error('Failed to get user session'));
-          setSessionChecked(true);
-        }
+        console.log('Unexpected error getting session:', error);
       } finally {
         if (mounted) {
           setIsLoading(false);
@@ -59,13 +55,9 @@ export function useUser() {
         // - Preference changes
         // - Role/permission changes
         setUser(session?.user ?? null);
-        setError(null);
-        setSessionChecked(true);
+        setIsLoading(false);
       } catch (error) {
         console.error('Error handling auth state change:', error);
-        setError(error instanceof Error ? error : new Error('Failed to handle auth state change'));
-      } finally {
-        setIsLoading(false);
       }
     });
 
@@ -80,5 +72,9 @@ export function useUser() {
   // - useUserPreferences: Handle user preferences
   // - useUserPermissions: Handle user roles and permissions
 
-  return { user, isLoading, error, sessionChecked };
+  return {
+    user,
+    isLoading,
+    sessionChecked
+  };
 } 

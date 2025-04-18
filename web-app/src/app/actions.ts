@@ -2,8 +2,7 @@
 
 import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import { AuthActionResult } from '@/types/auth';
-import { handleAuthError } from '@/lib/utils/error-handler';
+import type { AuthActionResult } from '@/types/auth';
 
 export async function loginAction(formData: { email: string; password: string }): Promise<AuthActionResult> {
   const supabase = createServerActionClient({ cookies });
@@ -14,10 +13,28 @@ export async function loginAction(formData: { email: string; password: string })
       password: formData.password,
     });
 
-    if (error) throw error;
+    if (error) {
+      console.log('Login error:', error);
+      return { 
+        success: false,
+        error: {
+          code: 'auth/error',
+          message: error.message,
+          status: 400
+        }
+      };
+    }
 
     if (!data.session) {
-      throw new Error('No session returned after login');
+      console.log('No session returned after login');
+      return { 
+        success: false,
+        error: {
+          code: 'auth/no-session',
+          message: 'No session returned after login',
+          status: 400
+        }
+      };
     }
 
     return { 
@@ -25,10 +42,14 @@ export async function loginAction(formData: { email: string; password: string })
       redirectTo: '/dashboard'
     };
   } catch (error) {
-    const authError = handleAuthError(error);
+    console.log('Unexpected error during login:', error);
     return {
       success: false,
-      error: authError
+      error: {
+        code: 'auth/unexpected',
+        message: 'An unexpected error occurred',
+        status: 500
+      }
     };
   }
 }
@@ -40,17 +61,31 @@ export async function logoutAction(): Promise<AuthActionResult> {
   
   try {
     const { error } = await supabase.auth.signOut();
-    if (error) throw error;
+    if (error) {
+      console.log('Logout error:', error);
+      return {
+        success: false,
+        error: {
+          code: 'auth/error',
+          message: error.message,
+          status: 400
+        }
+      };
+    }
     
     return { 
       success: true,
       redirectTo: '/'
     };
   } catch (error) {
-    const authError = handleAuthError(error);
+    console.log('Unexpected error during logout:', error);
     return {
       success: false,
-      error: authError
+      error: {
+        code: 'auth/unexpected',
+        message: 'An unexpected error occurred',
+        status: 500
+      }
     };
   }
 } 
