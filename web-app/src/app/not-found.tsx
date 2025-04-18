@@ -1,24 +1,34 @@
-import { buildLogger } from "@/lib/utils/build-logger";
+// web-app/src/app/not-found.tsx
+export const dynamic = 'force-dynamic'; // always render at runtime, never prerender
+export const revalidate = 0;           // no ISR for this route
 
-buildLogger.info('Initializing not-found page');
+import React from 'react';
+import { buildLogger } from '@/lib/utils/build-logger';
+
+// log module load (runs once, at startup)
+buildLogger.info('[NotFound] module loaded');
 
 export default function NotFound() {
+  buildLogger.info('[NotFound] render start');
+
   try {
-    buildLogger.info('Starting not-found page render');
-    
-    const content = (
-      <div className="flex min-h-screen flex-col items-center justify-center p-24">
-        <h2 className="mb-4 text-2xl font-bold">404 - Page Not Found</h2>
-        <p className="text-gray-600 dark:text-gray-400">The page you&apos;re looking for doesn&apos;t exist.</p>
-      </div>
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-center p-24">
+        <h1 className="mb-4 text-3xl font-bold">404 – Page Not Found</h1>
+        <p className="mb-6 text-lg text-gray-600 dark:text-gray-400 text-center max-w-md">
+          Oops! We can’t find the page you’re looking for.
+        </p>
+        <a
+          href="/"
+          className="text-base underline hover:no-underline focus:outline-none focus:ring"
+        >
+          ← Back to Home
+        </a>
+      </main>
     );
-    
-    buildLogger.info('Created not-found page content structure');
-    buildLogger.debug('Not-found page content structure created');
-    
-    return content;
   } catch (error) {
-    buildLogger.error('Error in not-found page render', error instanceof Error ? error : new Error('Unknown error'));
+    buildLogger.error('[NotFound] render error', error instanceof Error ? error : new Error(String(error)));
+    // re‑throw so Next.js still knows this page failed
     throw error;
   }
-} 
+}
