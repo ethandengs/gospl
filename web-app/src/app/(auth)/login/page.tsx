@@ -1,48 +1,61 @@
+// src/app/(auth)/login/page.tsx
 'use client';
 
+import React, { useState } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { AuthCard } from '@/components/auth/AuthCard';
 import { AuthForm } from '@/components/auth/auth-form';
 import { loginAction } from '@/app/actions';
-import { useSearchParams } from 'next/navigation';
-import { useState } from 'react';
 
 export default function LoginPage() {
   const searchParams = useSearchParams();
-  const redirectTo = searchParams.get('redirectTo') || '/dashboard';
+  const redirectTo = searchParams?.get('redirectTo') ?? '/dashboard';
+  const router = useRouter();
+
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleLogin = async ({ email, password }: { email: string; password: string }) => {
+  const handleLogin = async ({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }) => {
     if (isLoading) return;
-    
-    try {
-      setIsLoading(true);
-      console.log('Attempting login...');
 
-      // Use the server action for login
+    setErrorMessage(null);
+    setIsLoading(true);
+
+    try {
+      console.log('Attempting login with', email);
       const result = await loginAction({ email, password });
 
       if (result.success) {
-        console.log('Login successful, redirecting...');
-        // Use replace to prevent back button from returning to login
-        window.location.replace(redirectTo);
+        console.log('Login successful—redirecting to', redirectTo);
+        router.replace(redirectTo);
+      } else {
+        // you can customize based on your action's error shape
+        setErrorMessage(result.error ?? 'Login failed, please try again.');
       }
-    } catch (error) {
-      console.error('Login error:', error);
+    } catch (err) {
+      console.error('Login error:', err);
+      setErrorMessage('An unexpected error occurred.');
+    } finally {
       setIsLoading(false);
-      throw error;
     }
   };
 
   return (
-    <AuthCard
-      title="Welcome back"
-      subtitle="Sign in to monitor your gait health"
-    >
-      <AuthForm 
-        type="login" 
-        onSubmit={handleLogin} 
-        isLoading={isLoading} 
+    <AuthCard title="Welcome back" subtitle="Sign in to monitor your gait health">
+      {errorMessage && (
+        <p className="text-red-500 mb-4 text-center">{errorMessage}</p>
+      )}
+      <AuthForm
+        type="login"
+        onSubmit={handleLogin}
+        isLoading={isLoading}
       />
     </AuthCard>
   );
-} 
+}
