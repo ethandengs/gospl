@@ -1,12 +1,13 @@
-// src/app/not-found.tsx
+// web-app/src/app/not-found.tsx
 export const dynamic = 'force-dynamic'; // always render at runtime
-export const revalidate = 0;           // disable ISR
+export const revalidate = 0;           // no ISR
+export const prerender = false;        // disable build‑time prerendering
 
 import React from 'react';
 import Link from 'next/link';
 import { buildLogger } from '@/lib/utils/build-logger';
 
-// Log when this module is loaded
+// runs once when module is loaded
 buildLogger.info('[NotFound] module initialized');
 
 export default function NotFound() {
@@ -32,6 +33,7 @@ export default function NotFound() {
       '[NotFound] render error',
       error instanceof Error ? error : new Error(String(error))
     );
+    // re‑throw so Next.js knows the page render truly failed
     throw error;
   }
 }
