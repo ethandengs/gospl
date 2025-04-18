@@ -28,7 +28,6 @@ const getTheme = (key: string, fallback: Theme): Theme => {
     const theme = localStorage.getItem(key)
     return (theme as Theme) || fallback
   } catch {
-    // Handle localStorage errors (e.g., Safari private mode)
     return fallback
   }
 }
@@ -37,21 +36,16 @@ export function ThemeProvider({
   children,
   defaultTheme = "system",
   storageKey = "gospl-ui-theme",
-  ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(() => getTheme(storageKey, defaultTheme))
 
   useEffect(() => {
     const root = window.document.documentElement
-
     root.classList.remove("light", "dark")
 
     if (theme === "system") {
       const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light"
-
+        .matches ? "dark" : "light"
       root.classList.add(systemTheme)
       return
     }
@@ -64,15 +58,13 @@ export function ThemeProvider({
     setTheme: (theme: Theme) => {
       try {
         localStorage.setItem(storageKey, theme)
-      } catch {
-        // Handle localStorage errors silently
-      }
+      } catch {}
       setTheme(theme)
     },
   }
 
   return (
-    <ThemeProviderContext.Provider {...props} value={value}>
+    <ThemeProviderContext.Provider value={value}>
       {children}
     </ThemeProviderContext.Provider>
   )
@@ -85,4 +77,4 @@ export const useTheme = () => {
     throw new Error("useTheme must be used within a ThemeProvider")
 
   return context
-} 
+}
