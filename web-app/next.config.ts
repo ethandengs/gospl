@@ -11,8 +11,10 @@ const nextConfig: NextConfig = {
   },
   // Use standalone output to handle error pages dynamically
   output: 'standalone',
-  // Disable automatic static optimization for error pages
-  unstable_runtimeJS: true,
+  // Configure custom error page handling
+  async redirects() {
+    return [];
+  },
   webpack: (config) => {
     // Add path aliases
     config.resolve.alias = {
