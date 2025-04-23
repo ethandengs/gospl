@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: false,
   },
+  // Use standalone output to handle error pages dynamically
+  output: 'standalone',
+  // Disable automatic static optimization for error pages
+  unstable_runtimeJS: true,
   webpack: (config) => {
     // Add path aliases
     config.resolve.alias = {
