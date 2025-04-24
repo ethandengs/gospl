@@ -15,9 +15,15 @@ const nextConfig: NextConfig = {
       allowedOrigins: ['localhost:3000', 'gospl.health']
     },
     optimizePackageImports: ['@heroicons/react'],
+    // Add proper static generation settings
+    staticGenerationRetryCount: 3,
+    staticGenerationMaxConcurrency: 8,
+    staticGenerationMinPagesPerWorker: 25,
   },
-  // Disable automatic static optimization
-  output: 'standalone',
+  // Enable static optimization
+  output: 'export',
+  // Ensure 404 page is generated
+  trailingSlash: false,
   // Custom error page handling
   async redirects() {
     return [];
