@@ -16,13 +16,14 @@ const nextConfig: NextConfig = {
     },
     optimizePackageImports: ['@heroicons/react'],
   },
-  // Static generation settings
-  output: 'export',
+  // Use standalone output for hybrid static/dynamic
+  output: 'standalone',
   // Ensure proper routing
   trailingSlash: false,
-  // Disable image optimization for static export
+  // Image optimization settings
   images: {
-    unoptimized: true,
+    domains: ['gospl.health'],
+    formats: ['image/avif', 'image/webp'],
   },
   // Custom error page handling
   async redirects() {
