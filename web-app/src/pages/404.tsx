@@ -1,6 +1,10 @@
 // src/pages/404.tsx
 import type { NextPage } from 'next';
 
+// Force dynamic rendering to avoid static optimization issues
+export const dynamic = 'force-dynamic';
+export const runtime = 'edge';
+
 const Custom404: NextPage = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-24">
@@ -8,6 +12,14 @@ const Custom404: NextPage = () => {
       <p className="text-gray-600 dark:text-gray-400">The page you&apos;re looking for doesn&apos;t exist.</p>
     </div>
   );
+};
+
+// Disable static page generation
+export const getStaticProps = () => {
+  return {
+    props: {},
+    revalidate: 0, // This ensures the page is always rendered at runtime
+  };
 };
 
 export default Custom404;
