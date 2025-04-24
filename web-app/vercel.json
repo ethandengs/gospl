@@ -1,23 +1,14 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
-  "devCommand": "npm run dev",
+  "framework": "nextjs",
   "builds": [
     {
       "src": "package.json",
       "use": "@vercel/next",
       "config": {
-        "nodeVersion": "20.x",
-        "buildCommand": "npm run build",
-        "installCommand": "npm install"
+        "nodeVersion": "20.x"
       }
     }
   ],
-  "framework": "nextjs",
-  "regions": ["iad1"],
-  "build": {
-    "env": {
-      "NODE_ENV": "production"
-    }
-  }
+  "regions": ["iad1"]
 } 

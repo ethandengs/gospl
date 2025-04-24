@@ -3,7 +3,8 @@ import type { NextPage } from 'next';
 
 // Force dynamic rendering to avoid static optimization issues
 export const dynamic = 'force-dynamic';
-export const runtime = 'edge';
+// Use the correct experimental edge runtime
+export const runtime = 'experimental-edge';
 
 const Custom404: NextPage = () => {
   return (
