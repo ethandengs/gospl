@@ -1,11 +1,6 @@
 // src/pages/404.tsx
 import type { NextPage } from 'next';
 
-// Force dynamic rendering to avoid static optimization issues
-export const dynamic = 'force-dynamic';
-// Use the correct experimental edge runtime
-export const runtime = 'experimental-edge';
-
 const Custom404: NextPage = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-24">
@@ -15,12 +10,11 @@ const Custom404: NextPage = () => {
   );
 };
 
-// Disable static page generation
-export const getStaticProps = () => {
+// Use getServerSideProps to ensure server-side rendering
+export async function getServerSideProps() {
   return {
-    props: {},
-    revalidate: 0, // This ensures the page is always rendered at runtime
+    props: {}, // Will be passed to the page component as props
   };
-};
+}
 
 export default Custom404;
