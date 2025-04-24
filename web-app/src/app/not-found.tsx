@@ -1,4 +1,10 @@
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '404 - Page Not Found | GOSPL Health Monitor',
+  description: 'Sorry, we couldn\'t find the page you\'re looking for.',
+};
 
 export default function NotFound() {
   return (
