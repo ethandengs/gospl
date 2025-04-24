@@ -9,9 +9,16 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: false,
   },
-  // Use standalone output to handle error pages dynamically
+  // Configure for production builds
+  experimental: {
+    serverActions: {
+      allowedOrigins: ['localhost:3000', 'gospl.health']
+    },
+    optimizePackageImports: ['@heroicons/react'],
+  },
+  // Disable automatic static optimization
   output: 'standalone',
-  // Configure custom error page handling
+  // Custom error page handling
   async redirects() {
     return [];
   },
