@@ -1,6 +1,6 @@
 // src/app/layout.tsx
-export const dynamic = 'force-dynamic';  // force runtime rendering for all pages
-export const revalidate = 0;             // disable ISR
+export const dynamic = 'auto'
+export const revalidate = false;
 
 import type { Metadata, Viewport } from "next";
 import React from "react";
