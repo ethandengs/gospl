@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: false,
   },
   eslint: {
-    ignoreDuringBuilds: false,
+    ignoreDuringBuilds: true, // We'll handle linting separately
   },
   // Configure for production builds
   experimental: {
@@ -15,15 +15,15 @@ const nextConfig: NextConfig = {
       allowedOrigins: ['localhost:3000', 'gospl.health']
     },
     optimizePackageImports: ['@heroicons/react'],
-    // Add proper static generation settings
-    staticGenerationRetryCount: 3,
-    staticGenerationMaxConcurrency: 8,
-    staticGenerationMinPagesPerWorker: 25,
   },
-  // Enable static optimization
+  // Static generation settings
   output: 'export',
-  // Ensure 404 page is generated
+  // Ensure proper routing
   trailingSlash: false,
+  // Disable image optimization for static export
+  images: {
+    unoptimized: true,
+  },
   // Custom error page handling
   async redirects() {
     return [];

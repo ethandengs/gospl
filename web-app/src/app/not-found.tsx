@@ -14,12 +14,12 @@ export default function NotFound() {
         <p className="text-gray-600 dark:text-gray-400 mb-4">
           Could not find requested resource
         </p>
-        <a
+        <Link
           href="/"
           className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline"
         >
           Return Home
-        </a>
+        </Link>
       </div>
     </div>
   );
