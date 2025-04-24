@@ -1,7 +1,13 @@
 // src/pages/404.tsx
 import type { NextPage } from 'next';
+import { useEffect } from 'react';
 
 const Custom404: NextPage = () => {
+  useEffect(() => {
+    // Client-side only code
+    console.log('404 page rendered');
+  }, []);
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-24">
       <h2 className="mb-4 text-2xl font-bold">404 - Page Not Found</h2>
@@ -9,12 +15,5 @@ const Custom404: NextPage = () => {
     </div>
   );
 };
-
-// Use getServerSideProps to ensure server-side rendering
-export async function getServerSideProps() {
-  return {
-    props: {}, // Will be passed to the page component as props
-  };
-}
 
 export default Custom404;
