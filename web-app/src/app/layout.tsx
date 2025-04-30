@@ -89,7 +89,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ThemeProvider defaultTheme="system" storageKey="gospl-ui-theme">
           <AuthProvider>
             {children}
-            <Toaster />
+            {/* <Toaster /> */}
           </AuthProvider>
         </ThemeProvider>
         <VercelAnalyticsClient />
