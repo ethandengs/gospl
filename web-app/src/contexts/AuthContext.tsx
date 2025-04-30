@@ -115,7 +115,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         resetPassword,
       }}
     >
-      {loading ? null : <>{children}</>}
+      {/* Render children immediately */}
+      {children}
     </AuthContext.Provider>
   )
 }
